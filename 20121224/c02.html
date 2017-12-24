@@ -52,8 +52,16 @@
 
       //クリックしたら
       calcium.addEventListener('click', function(){
-        createjs.Tween.get(calcium).to({x:500}, 2000);
+        createjs.Tween.get(calcium).call(calciumWalk).to({x:500}, 2000).call(calciumStop);
       });
+
+      function calciumWalk(){
+        calcium.gotoAndPlay('walk');
+      }
+
+      function calciumStop(){
+        calcium.gotoAndPlay('stop');
+      }
     }
 
     //アニメーション
