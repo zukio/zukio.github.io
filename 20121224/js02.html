@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h1>deviceOrientation | ジャイロのテスト</h1>
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+$(function(){
+  console.log('読み込んだよ');
+
+  window.addEventListener('devicemotion', orienDevice);
+  //すまほをふったらよびだされる
+  function orienDevice(evt){
+    console.log(evt);
+
+    //x軸
+    var x = evt.beta;
+    var y = evt.gamma;
+    var z = evt.alpha;
+
+    $('ul li:eq(0)').text('x: '+x);
+    $('ul li:eq(1)').text('y: '+y);
+    $('ul li:eq(2)').text('z: '+z);
+
+  }
+});
+</script>
+</body>
+</html>
