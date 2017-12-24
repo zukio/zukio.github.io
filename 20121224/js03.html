@@ -22,8 +22,27 @@ $(function(){
     console.log(pos);
     var lat = calLocation(pos.coords.latitude); //緯度
     var lon = calLocation(pos.coords.longitude); //経度
+    setWeather(lat,lon); //緯度経度を受け渡し
     console.log('lat: '+lat, 'lon: '+lon)
   });
+
+  //天気を表示する関数
+  function setWeather(lat, lon){
+    //openweathermapのAPIキー（定数：const）
+    const apikey = '8a3117bdb78b8f0efa0fc11d5a710e92';
+    //openweathermapのURL
+    var weatherUrl = 'http://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lon+'&appid='+apikey;
+    //ajax通信
+    $.ajax({
+      url:weatherUrl,
+      dataType:'json'
+    }).done(function(data){
+
+    }).fail(function(){
+      consoke.log('ajax error');
+    });
+  }
+
   //小数点2桁で切り捨て
   function calLocation(num){
     var numA = num*100;
