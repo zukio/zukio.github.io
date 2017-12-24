@@ -20,10 +20,16 @@ $(function(){
   //GPSからの緯度経度の取得
   navigator.geolocation.getCurrentPosition(function(pos){
     console.log(pos);
-    var lat = pos.coords.latitude; //緯度
-    var lon = pos.coords.longitude; //経度
+    var lat = calLocation(pos.coords.latitude); //緯度
+    var lon = calLocation(pos.coords.longitude); //経度
     console.log('lat: '+lat, 'lon: '+lon)
   });
+  //小数点2桁で切り捨て
+  function calLocation(num){
+    var numA = num*100;
+    numA = Math.floor(numA)/100;
+    return numA;
+  }
 
 });
 </script>
