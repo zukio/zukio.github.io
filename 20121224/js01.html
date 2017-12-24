@@ -28,9 +28,9 @@ $(function(){
     var y = evt.acceleration.y;
     var z = evt.acceleration.z;
 
-    $('ul li:eq(0)').test('x: '+x);
-    $('ul li:eq(1)').test('y: '+y);
-    $('ul li:eq(2)').test('z: '+z);
+    $('ul li:eq(0)').text('x: '+x);
+    $('ul li:eq(1)').text('y: '+y);
+    $('ul li:eq(2)').text('z: '+z);
 
     if( Math.abs(x) > 10 || Math.abs(y) || Math.abs(z) ){
       $('h1').text('振り終わったよ');
