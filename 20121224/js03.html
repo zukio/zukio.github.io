@@ -8,11 +8,10 @@
 </head>
 <body>
   <h1>deviceOrientation | GPSのテスト</h1>
-  <ul>
-    <li></li>
-    <li></li>
-    <li></li>
-  </ul>
+  <dl id = "weatherMap">
+    <dt>地域名</dt>
+    <dd id = "areaName"></dd>
+  </dl>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
 $(function(){
@@ -37,6 +36,8 @@ $(function(){
       url:weatherUrl,
       dataType:'json'
     }).done(function(data){
+      var areaName = data.name;
+      $('#areaName').text(areaName);
 
     }).fail(function(){
       console.log('ajax error');
