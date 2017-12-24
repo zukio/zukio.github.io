@@ -20,8 +20,8 @@ $(function(){
   //GPSからの緯度経度の取得
   navigator.geolocation.getCurrentPosition(function(pos){
     console.log(pos);
-    var lat = pos.cords.latitude; //緯度
-    var lon = pos.cords.longitude; //経度
+    var lat = pos.coords.latitude; //緯度
+    var lon = pos.coords.longitude; //経度
     console.log('lat: '+lat, 'lon: '+lon)
   });
 
