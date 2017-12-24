@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id = "stage" width="640" height="480">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+
+  <script>
+  $(function(){
+    //DOMの読み込み
+    var stage = new createjs.Stage('stage');
+
+    //図形の描画（登録）
+    var loadQueue = new createjs.loadQueue();
+    //ファイルの指定, 読み込み開始
+    loadQueue.loadManifest(manifest);
+    loadQueue.addEventListener('complete', function(){
+      console.log('読み込み完了');
+    });
+
+    //アニメーション
+    createjs.Ticker.addEventListener('tick', tick);
+    //requestAnimationFrame（slideと違ってウィンドウを閉じたら止まる）
+    createjs.Ticker.timingMode = createjs.Ticker.RAF_SYNCED;
+
+    function tick(){
+
+      stage.update();
+    }
+
+
+  })
+  </script>
+</body>
+</html>
