@@ -30,7 +30,7 @@ $(function(){
     //openweathermapのAPIキー（定数：const）
     const apikey = '8a3117bdb78b8f0efa0fc11d5a710e92';
     //openweathermapのURL
-    var weatherUrl = 'http://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lon+'&appid='+apikey;
+    var weatherUrl = 'api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lon+'&appid='+apikey;
     //ajax通信
     $.ajax({
       url:weatherUrl,
