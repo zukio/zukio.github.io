@@ -7,10 +7,30 @@
   <title>Document</title>
 </head>
 <body>
-  <h1>JavaScriptの練習</h1>
+  <h1>devicemotionのてすと</h1>
   <ul>
-    <li>Home</li>
-    <li>About</li>
+    <li></li>
+    <li></li>
+    <li></li>
   </ul>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+$function(){
+  console.log('読み込んだよ');
+
+  window.addEventListener('devicemotion', function(evt){
+    console.log(evt);
+
+    //x軸
+    var x = evt.acceleration.x;
+    var y = evt.acceleration.y;
+    var z = evt.acceleration.z;
+  });
+
+  $('ul li:eq(0)').test('x: '+x);
+  $('ul li:eq(1)').test('x: '+y);
+  $('ul li:eq(2)').test('x: '+z);
+}
+</script>
 </body>
 </html>
