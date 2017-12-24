@@ -18,7 +18,9 @@
 $(function(){
   console.log('読み込んだよ');
 
-  window.addEventListener('devicemotion', function(evt){
+  window.addEventListener('devicemotion', shakeDevice);
+  //すまほをふったらよびだされる
+  function shakeDevice(evt){
     console.log(evt);
 
     //x軸
@@ -26,10 +28,15 @@ $(function(){
     var y = evt.acceleration.y;
     var z = evt.acceleration.z;
 
-  $('ul li:eq(0)').test('x: '+x);
-  $('ul li:eq(1)').test('y: '+y);
-  $('ul li:eq(2)').test('z: '+z);
-});
+    $('ul li:eq(0)').test('x: '+x);
+    $('ul li:eq(1)').test('y: '+y);
+    $('ul li:eq(2)').test('z: '+z);
+
+    if( Math.abs(x) > 10 || Math.abs(y) || Math.abs(z) ){
+      $('h1').text('振り終わったよ');
+      window.removeEventListener('devicemotion', shakeDevice);
+    }
+  }
 });
 </script>
 </body>
