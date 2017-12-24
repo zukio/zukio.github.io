@@ -32,7 +32,7 @@ $(function(){
     $('ul li:eq(1)').text('y: '+y);
     $('ul li:eq(2)').text('z: '+z);
 
-    if( Math.abs(x) > 10 || Math.abs(y) || Math.abs(z) ){
+    if( Math.abs(x) > 10 || Math.abs(y) > 10 || Math.abs(z) > 10 ){
       $('h1').text('振り終わったよ');
       window.removeEventListener('devicemotion', shakeDevice);
     }
