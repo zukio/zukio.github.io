@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Google Maps API</title>
+    <style>
+      #Map {
+      height: 400px;
+      width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+ <!--HTMLに表示 -->
+    <div id=&quot;Map&quot;></div>
+ <!--Google Maps API -->
+  <script>
+    function initMap() {
+      var mymark = {lat: 35.67241, lng: 139.48073};  // 目的地
+      var park1 = {lat: 35.67295, lng: 139.48122}; // パーキング1
+      var park2 = {lat: 35.67122, lng: 139.48}; // パーキング2
+      var park3 = {lat: 35.67017, lng: 139.47816};  // パーキング3
+      var mycenter = {lat: 35.6716, lng: 139.4797};  // センターポジション
+
+      var map = new google.maps.Map(document.getElementById('Map'), {
+        zoom: 17,  // ズーム値
+        center: mycenter,
+        scrollwheel: false  // スクロールの有無
+      });
+
+      var marker = new google.maps.Marker({
+        position: mymark,
+        map: map,
+        animation: google.maps.Animation.DROP  // ドロップアニメの有無
+      });
+      // カスタムマーカーは下記コメント参照
+      // var markerImg1 = {url: 'http://www.moranbong.tokyo/images/icons/icon_parking.png'}; // カスタムマーカーの画像ファイルを指定
+      // icon: markerImg1 // カスタムマーカーの画像呼び出し
+      var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';    // マーカーの画像ファイルを指定
+      var marker = new google.maps.Marker({
+        position: park1,
+        map: map,
+        icon: iconBase + 'parking_lot_maps.png'   // マーカーの画像呼び出し
+      });
+      var marker = new google.maps.Marker({
+        position: park2,
+        map: map,
+        icon: iconBase + 'parking_lot_maps.png'   // マーカーの画像呼び出し
+      });
+      var marker = new google.maps.Marker({
+        position: park3,
+        map: map,
+        icon: iconBase + 'parking_lot_maps.png'   // マーカーの画像呼び出し
+      });
+    }
+    </script>
+    <!--Google Maps API - CODE -->
+<script src=&quot;https://maps.googleapis.com/maps/api/js?key=AIzaSyB6PVyLrPBGwROF7L_mXFLSvuveWKn0N2o&amp;callback=initMap&quot; async=&quot;&quot; defer=&quot;defer&quot;></script>
+</body>
+</html>
