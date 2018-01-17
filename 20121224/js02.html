@@ -7,7 +7,7 @@
   <title>Document</title>
 </head>
 <body>
-  <h1>devicemotionのてすと</h1>
+  <h1>deviceOrientation | ジャイロのテスト</h1>
   <ul>
     <li></li>
     <li></li>
@@ -18,24 +18,20 @@
 $(function(){
   console.log('読み込んだよ');
 
-  window.addEventListener('devicemotion', shakeDevice);
+  window.addEventListener('deviceorientation', orienDevice);
   //すまほをふったらよびだされる
-  function shakeDevice(evt){
+  function orienDevice(evt){
     console.log(evt);
 
     //x軸
-    var x = evt.acceleration.x;
-    var y = evt.acceleration.y;
-    var z = evt.acceleration.z;
+    var x = evt.beta;
+    var y = evt.gamma;
+    var z = evt.alpha;
 
     $('ul li:eq(0)').text('x: '+x);
     $('ul li:eq(1)').text('y: '+y);
     $('ul li:eq(2)').text('z: '+z);
 
-    if( Math.abs(x) > 10 || Math.abs(y) > 10 || Math.abs(z) > 10 ){
-      $('h1').text('振り終わったよ');
-      window.removeEventListener('devicemotion', shakeDevice);
-    }
   }
 });
 </script>
