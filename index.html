@@ -1,120 +1,17 @@
-<div class="header" style="position:relative;">
-  <div class="ball" style="position:absolute;"></div>
-  <div class="ball" style="position:absolute;"></div>
-  <div class="ball" style="position:absolute;"></div>
-  <div class="ball" style="position:absolute;"></div>
-  <div class="ball" style="position:absolute;"></div>
-  <div class="ball" style="position:absolute;"></div>
-  <div class="ball" style="position:absolute;"></div>
-  <div class="title">
-    <a href="/">
-      <span style="font-size:25px;">YoheiM.NET</span>
-      <span id="header_subtitle" style="font-size:small;">  - 世の中のWeb情報に、体験と意見を添えて発信します</span>
-    </a>
-  </div>
-</div>
-<script type="text/javascript">
-$(function(){
-// ジャイロセンサーが使える場合には、TOPに配置したボールを傾きによって動かせるようにする。（遊び）
-  var
-    balls = $('.ball'),
-    bounceRaito = 0.4,
-    bounceLimitSpeed = 1.5,
-    min = Math.min,
-    max = Math.max,
-    abs = Math.abs,
-    floor = Math.floor,
-    rValues = [1.0, 0.76, 0.8, 0.7, 0.6, 0.55, 0.612, 0.9, 0.65, 0.95, 0.62, 0.87, 0.33, 0.45, 0.23, 0.987, 0.67, 0.99, 0.34, 0.77, 0.69, 0.44, 1.2, 1.05],
-    ballCanMove = false,
-    areaHeight = $(".header").height(),
-    areaWidth = $(".header").width(),
-    bottomLimit = Math.floor(areaHeight - $(".ball").height()),
-    rightLimit = Math.floor(areaWidth - $(".ball").width())
-  ;
-
-
-  console.debug('limit = ', bottomLimit, rightLimit, balls);
-
-  // ボールを動かすサインを出す。
-  setTimeout(function() {ballCanMove = true; console.debug('gyro start.')}, 2000);
-
-  // 回転を取得する。
-  window.ondeviceorientation = function(event) {
-    console.debug('ondeviceorientation is called.');
-
-    // 回転量
-    var alpha = event.alpha;   // z-axis
-    var beta = event.beta;     // x-axis
-    var gamma = event.gamma;   // y-axis
-
-    // ボールを動かす。
-    if (ballCanMove) {
-
-      balls.each(function(index, ball) {
-
-        // betaの値が正なら下へ、負なら上へ動かす。
-        var oldSpeed = ball.speedY || 0;
-        var y = parseInt(ball.style.top || 0);
-        if (y === bottomLimit && oldSpeed === 0 && beta > 0) {
-          // 何もしない
-        } else if (y === 0 && oldSpeed === 0 && beta < 0) {
-          // 何もしない
-        } else {
-          var speed = oldSpeed + ((beta) / 300) * rValues[index%rValues.length];
-          var y = y + speed;
-          y =  max(0, min(bottomLimit, y));
-          ball.style.top = y + 'px';
-          ball.speedY = speed;
-          // ここからは跳ね返りの実装
-          if (y == bottomLimit && oldSpeed > bounceLimitSpeed) {
-            ball.speedY = -speed * bounceRaito;
-          } else if (y === bottomLimit && oldSpeed <= bounceLimitSpeed) {
-            ball.speedY = 0;
-          }
-          if (y == 0 && oldSpeed < -bounceLimitSpeed) {
-            ball.speedY = -speed * bounceRaito;
-          } else if (y === 0 && oldSpeed >= -bounceLimitSpeed) {
-            ball.speedY = 0;
-          }
-        }
-
-        // gammaの値が正なら右へ、負なら左へ動かす。
-        var oldSpeed = ball.speedX || 0;
-        var x = parseInt(ball.style.left || 0);
-        if (x === rightLimit && oldSpeed === 0 && gamma > 0) {
-          // 何もしない
-        } else if (x === 0 && oldSpeed === 0 && gamma < 0) {
-          // 何もしない
-        } else {
-
-          var speed = oldSpeed + ((gamma) / 300) * rValues[index%rValues.length];
-          var x = x + speed;
-          x =  max(0, min(rightLimit, x));
-          ball.style.left = x + 'px';
-          ball.speedX = speed;
-          // ここからは跳ね返りの実装
-          if (x == rightLimit && oldSpeed > bounceLimitSpeed) {
-            ball.speedX = -speed * bounceRaito;
-          } else if (x === rightLimit && oldSpeed <= bounceLimitSpeed) {
-            ball.speedX = 0;
-          }
-          if (x == 0 && oldSpeed < -bounceLimitSpeed) {
-            ball.speedX = -speed * bounceRaito;
-          } else if (x === 0 && oldSpeed >= -bounceLimitSpeed) {
-            ball.speedX = 0;
-          }
-        }
-      });
-    }
-  };
-
-  // デバイスの向きが変わったら、横幅の再計算をする。
-  window.onorientationchange = function () {
-    console.debug('orientationchange: is called.');
-    areaHeight = $(".header").height(),
-    areaWidth = $(".header").width(),
-    bottomLimit = Math.floor(areaHeight - $(".ball").height()),
-    rightLimit = Math.floor(areaWidth - $(".ball").width())
-  };
-});
-</script>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+  <canvas id = "myCanvas" width = "500" height= "250">
+    Canvas
+  </canvas>
+  <script type="text/javascript">
+    (function functionName() {
+      'use script';
+    })();
+  </script>
+</body>
+</html>
