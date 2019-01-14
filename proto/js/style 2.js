@@ -21,7 +21,7 @@ var autoplay = true;   //自動再生
 var autoplaySecond = 1000;
 var stopFrame = 5;    //ストップを設定しないときは0
 var fade = true;      //フェードアニメーションの有無
-var slick = true;    //スライドアニメーションの有無
+var slick = false;    //スライドアニメーションの有無
 var animSecond = 500; //フェード・スライド秒数
 //一連のアニメーションを再生・停止した後、特定のフレームをループする
 var loopList = [0,1];
@@ -31,14 +31,17 @@ var loopTimes = 10;
 var item = item_parent + " " + item_child;
 var item_next = 1;
 var item_n = 0;       //総スライド数
+var max_height = 0;   //スライドの最大高さ
+var max_width = 0;    //スライドの最大幅
+var item_html = [];   //条件にあったhtml要素
 $(document).ready(function(){
-  var max_height = 0;   //スライドの最大高さ
-  var max_width = 0;    //スライドの最大幅
-  var item_html = $(item_parent).children();
   //条件にあったhtml要素を取得・配列化
+  item_html = $(item_parent).children();
 	$(item).each(function(i){
+		//item_html[i] =  $(this).html();
 		item_n ++;
-		//各要素の高さを取得し、最大値をmax_heightに代入
+
+		//ついでに各要素の高さを取得し、最大値をmax_heightに代入
 		this_height = $(this).height();
 		if(max_height < this_height){
 			max_height = this_height;
@@ -47,33 +50,25 @@ $(document).ready(function(){
     if(max_width < this_width){
 			max_width = this_width;
 		}
+
 	});
+  console.log(this_height,max_width);
 	//スライドの大枠の高さを、アイテムの高さの最大値に合わせる。
 	$(item_parent).css("height",max_height);
-  //スライドアニメーションさせる場合、アイテムの最大幅をスライド距離とする
-  var slideWidth = 0;
-  if(slick){
-    slideWidth = max_width ;
-  }
-  //フェードアニメーションさせる場合
-  var opacityValue = 0;
-  if(!fade){
-    opacityValue = 1 ;
-  }
-  //一定間隔でスライドさせる関数に引数を渡す
-  var FuncToString = function(){item_slide(slideWidth,opacityValue,item_html);};
 
 	//スライドの1つ目以外を消去
 	$(item).not(":first").remove();
-	next_show(item_html);
+  var item_htmlCheck = $(item_parent).children();
+	next_show();
 
   //自動再生なら
   if(autoplay){
     //一定間隔でスライドさせるタイマーを0N
+    var FuncToString = "item_slide()";
   	startTimer(FuncToString);
   }
-  loopSlide(item_html);
 });
+
 
 //関数を定義
 //タイマー0N/0FF
@@ -81,11 +76,14 @@ var timer;
 function startTimer(FuncToString){
   timer = setInterval(FuncToString, autoplaySecond);
 }
+function stopTimer(){
+  clearInterval(timer);
+}
 
 //次のアイテムを出力する（自動再生の場合）
 var currentCount = 0; //スライドした回数
-function next_show(array) {
-	$(array[item_next]).addClass("next").appendTo(item_parent).css("opacity",0);
+function next_show() {
+	$(item_html[item_next]).addClass("next").appendTo(item_parent).css("opacity",0);
   if(item_next+1 > item_n-1){
 		item_next = 0;
 	} else {
@@ -95,25 +93,32 @@ function next_show(array) {
   if(stopFrame){
     currentCount++;
     if(currentCount == stopFrame){
-      clearInterval(timer);
+      stopTimer();
       currentCount = 0;
+      //ストップ後のループが設定されていたら
+      if(loopList.length){
+        console.log(loopList);
+      }
     }
   }
 }
 
-function loopSlide(array){
-  //ストップ後のループが設定されていたら
-  if(loopList.length){
-    var loopArray = [loopList.length];
-    for(var i = 0; i < loopList.length; i++){
-      loopArray[i] = array[loopList[i]];
-    }
-    console.log(loopArray);
-  }
+function loopSlide(){
+  
 }
 
 //アイテムをスライドさせる
-function item_slide(slideWidth,opacityValue,array) {
+function item_slide() {
+  //スライドアニメーションさせる場合
+  var slideWidth = 0;
+  if(slick){
+    slideWidth = max_width ;
+  }
+  //フェードアニメーションさせる場合
+  var opacityValue = 0;
+  if(!fade){
+    opacityValue = 1 ;
+  }
   //現在表示してるものをアニメーションさせながら消す
 	$(item + ":first").animate({
 		"left":-slideWidth+"px",
@@ -127,5 +132,5 @@ function item_slide(slideWidth,opacityValue,array) {
 		"left":0,
 		"opacity":1
 	}, animSecond).removeClass("next");
-	next_show(array);
+	next_show();
 }
