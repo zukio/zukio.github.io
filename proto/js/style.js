@@ -15,18 +15,14 @@ var basicSprite = {
 /**********************************************************************/
 
 //変数を定義
-var item_parent = ".slide";
-var item_child = ".item";
+var item_parent = ".splash-image-wrap";
+var item_child = ".splash-image";
 var autoplay = true;   //自動再生
 var autoplaySecond = 1000;
-var stopFrame = 10;    //ストップを設定しないときは0
+var stopFrame = 12;    //ストップを設定しないときは0
 var fade = true;      //フェードアニメーションの有無
-var slick = true;     //スライドアニメーションの有無
+var slick = false;     //スライドアニメーションの有無
 var animSecond = 500; //フェード・スライド秒数
-
-//一連のアニメーションを再生・停止した後、特定のフレームをループする
-var loopList = [];
-var loopTimes = 2;
 
 //初期化（上記で定義した変数に合わせて動的に初期化されます）
 var item = item_parent + " " + item_child;
@@ -92,7 +88,6 @@ function next_show(array) {
       onPlay = false;
       currentCount = 0;
       clearInterval(timer);
-      loopSlide(array);
     }
   }
   if(onPlay){
@@ -102,25 +97,6 @@ function next_show(array) {
   	} else {
   		item_next += 1;
   	}
-  }
-}
-
-function loopSlide(array){
-  //ストップ後のループが設定されていたら
-  if(loopList.length){
-    var loopArray = [loopList.length];
-    for(var i = 0; i < loopList.length; i++){
-      $(array[loopList[i]]).removeClass("next");
-      console.log(array[loopList[i]]);
-      loopArray[i] = array[loopList[i]];
-    }
-    stopFrame = loopTimes;
-    item_n = loopList.length;
-    next_show(loopArray);
-    //一定間隔でスライドさせる関数に引数を渡す
-    var FuncToString = function(){item_slide(loopArray);};
-    startTimer(FuncToString);
-    console.log(loopArray);
   }
 }
 
