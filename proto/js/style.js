@@ -18,8 +18,8 @@ var basicSprite = {
 var item_parent = ".splash-image-wrap";
 var item_child = ".splash-image";
 var autoplay = true;   //自動再生
-var autoplaySecond = 1000;
-var stopFrame = 12;    //ストップを設定しないときは0
+var autoplaySecond = 600;
+var stopFrame = 18;    //ストップを設定しないときは0
 var fade = true;      //フェードアニメーションの有無
 var slick = false;     //スライドアニメーションの有無
 var animSecond = 500; //フェード・スライド秒数
@@ -34,7 +34,6 @@ $(document).ready(function(){
   var max_width = 0;    //スライドの最大幅
   var item_html = $(item_parent).children();
   console.log(item_html);
-  console.log(item_html[item_next]);
   //条件にあったhtml要素を取得・配列化
 	$(item).each(function(i){
 		item_n ++;
@@ -59,6 +58,7 @@ $(document).ready(function(){
 
 	//スライドの1つ目以外を消去
 	$(item).not(":first").remove();
+  console.log(item_html[0]);
 	next_show(item_html);
 
   //自動再生なら
@@ -79,7 +79,6 @@ function startTimer(FuncToString){
 var currentCount = 0; //スライドした回数
 function next_show(array) {
   console.log(array[item_next]);
-  console.log(item_next);
   var onPlay = true;
   //自動ストップ（再生スライド数）が指定されていたら
   if(stopFrame){
@@ -90,6 +89,7 @@ function next_show(array) {
       clearInterval(timer);
     }
   }
+  console.log(currentCount);
   if(onPlay){
     $(array[item_next]).addClass("next").appendTo(item_parent).css("opacity",0);
     if(item_next+1 == item_n){

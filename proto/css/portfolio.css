@@ -1347,7 +1347,6 @@ html {
     padding-bottom: 0px;
     padding-top: 0px; } }
 
-
 .centered .outer-wrap {
   margin-top: 50px;
   max-width: 2000px;
@@ -1356,6 +1355,7 @@ html {
   width: 100%; }
 
 .image-right .outer-wrap {
+  position: absolute;
   margin-top: 50px;
   max-width: 2000px;
   min-height: calc(100vh - 100px);
@@ -1365,42 +1365,26 @@ html {
 .image-left .outer-wrap {
   margin-top: 50px;
   max-width: 2000px;
-  min-height: calc(100vh - 100px);
+  /min-height: calc(100vh - 100px);
   padding-bottom: 50px;
   width: 50%; }
 
 .image-right .splash-image,
 .image-left .splash-image {
+  position: absolute;
   pointer-events: none;
   /* stylelint-disable function-url-quotes */
-  /* background-image: url(""); */
+  /*background-image: url("../img/suzuki/syumi/1.JPG");
   /* stylelint-enable function-url-quotes */
   background-position: top center;
   background-repeat: no-repeat;
   background-size: cover;
  }
 
- ul.splash-image-wrap li.anim01 {
-   background-image: url("img⁩/suzuki⁩/⁨syumi⁩/1.JPG");
+ul li p {display: none;}
+ .next{
+   position: absolute;
  }
- ul.splash-image-wrap li.anim02 {
-   background-image: url("../img⁩/suzuki⁩/⁨syumi⁩/2.JPG");
- }
- ul.splash-image-wrap li.anim03 {
-   background-image: url("../img⁩/suzuki⁩/⁨syumi⁩/3.JPG");
- }
- ul.splash-image-wrap li.anim03 {
-   background-image: url("../img⁩/suzuki⁩/⁨syumi⁩/4.JPG");
- }
- ul.splash-image-wrap li.anim03 {
-   background-image: url("../img⁩/suzuki⁩/⁨syumi⁩/5.JPG");
- }
- ul.splash-image-wrap li.anim03 {
-   background-image: url("../img⁩/suzuki⁩/⁨syumi⁩/6.JPG");
- }
-
-
-
 
 .image-right .splash-image::before,
 .image-left .splash-image::before {
