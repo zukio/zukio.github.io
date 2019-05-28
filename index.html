@@ -5,64 +5,11 @@
   <title>Interactive Art</title>
 </head>
 <body>
-  <img src="Top-Google-Chrome-2017-07-19-13.05.12.png">
   <canvas id="myCanvas" width="500" height="250">
     Canvas works only in <a href="https://community.canvaslms.com/docs/doc-10720">these browsers</a>
   </canvas>
   <script>
-  (function() {
-    'use strict';
-    var canvas;
-    var ctx;
-    var Ball;
-
-    canvas = document.getElementById("myCanvas");
-    if(!canvas || !canvas.getContext) return false;
-    ctx = canvas.getContext('2d');
-
-    function rand(min, max) {
-      // 0-n
-      // Math.floor(Math.random() * (n + 1))
-      // min-max
-      return min + Math.floor(Math.random() * (max - min + 1));
-    }
-
-    Ball = function(x, y, r) {
-      this.x = x;
-      this.y = y;
-      this.r = r;
-      this.vx = rand(-10, 10);
-      this.vy = rand(-10, 10);
-      this.color = 'hsla(120, 80%, 40%, 0.8)';
-      this.draw = function() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
-        ctx.fillStyle = this.color;
-        ctx.closePath();
-        ctx.fill();
-      };
-      this.move = function() {
-        this.x += this.vx;
-        this.y += this.vy;
-      }
-    };
-
-    var ball = new Ball(rand(100, 200), rand(100, 200), rand(10, 50));
-    ball.draw();
-
-    function update() {
-      ctx.fillStyle = '#ecf0f1';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ball.draw();
-      ball.move();
-      setTimeout(function() {
-        update();
-      }, 30);
-    }
-
-    update();
-
-  })();
+  (function() {})();
   </script>
 </body>
 </html>
