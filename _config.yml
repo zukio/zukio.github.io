@@ -1,1 +1,14 @@
+# テーマの名前
 theme: jekyll-theme-slate
+
+# 言語の設定
+languageCode: "ja"
+
+# パスの指定。これをしないとcssがうまく反映されません。
+canonifyurls: true
+
+# タイトル
+# title: "My Site"
+
+# github-pagesでのURL
+# baseurl: "http://zukio.github.io/"
